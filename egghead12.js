@@ -4,9 +4,9 @@ import { Component } from 'react';
 import React from "react";
 import ReactDOM from "react-dom";
 
-const appState = observable() {
+const appState = observable({
     count : 0
-}
+})
 appState.increment = function() {
     this.count++
 }

@@ -4,12 +4,22 @@ import { Component } from 'react';
 import React from "react";
 import ReactDOM from "react-dom";
 
+const appState = observable({
+    count : 0
+})
+appState.increment = function() {
+    this.count++
+}
+appState.decrement = function() {
+    this.count--
+}
+
+
 @observer class Counter extends Component {
-    @observable count = 0
     render() {
         return (
             <div>
-                Counter: {this.count} <br/>
+                Counter: {this.props.store.count} <br/>
                 <button onClick={this.handleInc}>+</button>
                 <button onClick={this.handleDec}>-</button>
             </div> 
@@ -17,12 +27,12 @@ import ReactDOM from "react-dom";
     }
 
     handleInc = () => {
-        this.count++
+        this.props.store.increment()
     }
     handleDec = () => {
-        this.count--
+        this.props.store.decrement()
     }
 }
 
 const rootElement = document.getElementById("root");
-ReactDOM.render(<Counter/>, rootElement);
+ReactDOM.render(<Counter store={appState} />, rootElement);
